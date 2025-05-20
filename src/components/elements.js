@@ -1,77 +1,90 @@
-import "..styles/style.css";
+function Container(config) {
+  let setContainer;
+  let options = ["section", "div", "article", "header", "footer", "span"];
+  if (!options.includes(config.type)) {
+    console.error(
+      `El contenedor ${config.type} no esta disponible en la funcion`,
+    );
+  }
+  setContainer = document.createElement(config.type);
 
-function Button(texto, clase) {
-  let boton = document.createElement("button");
-  boton.textContent = texto;
-  if (clase !== "") {
-    boton.classList.add(clase);
-    return boton;
+  if (typeof config.className === "object") {
+    config.className.forEach((clase) => {
+      setContainer.classList.add(clase);
+    });
   } else {
-    return boton;
+    setContainer.classList.add(config.className);
+  }
+  config.id ? (setContainer.id = config.id) : null;
+  return setContainer;
+}
+
+function Texto(config) {
+  let options = ["h1", "h2", "h3", "p"];
+
+  if (options.includes(config.type)) {
+    let setTexto = document.createElement(config.type);
+    setTexto.innerText = config.text;
+    if (typeof config.className === "object") {
+      config.className.forEach((clase) => {
+        setTexto.classList.add(clase);
+      });
+    } else {
+      setTexto.classList.add(config.className);
+    }
+    return setTexto;
+  } else {
+    console.error(
+      `El tipo de texto ${config.type} no esta disponible en la funcion`,
+    );
   }
 }
 
-function Parrafo(texto, clase) {
-  let parrafo = document.createElement("p");
-  parrafo.textContent = texto;
-  if (clase !== "") {
-    parrafo.classList.add(clase);
-    return parrafo;
+function Asset(config){
+  let options = ["img", "video", "audio"];
+  if (options.includes(config.type)) {
+    let setAsset = document.createElement(config.type);
+    setAsset.src = config.src;
+    if (typeof config.className === "object") {
+      config.className.forEach((clase) => {
+        setAsset.classList.add(clase);
+      });
+    } else {
+      setAsset.classList.add(config.className);
+    }
+    return setAsset;
   } else {
-    return parrafo;
+    console.error(
+      `El tipo de asset ${config.type} no esta disponible en la funcion`,
+    );
   }
 }
 
-function Titulo(texto, clase) {
-  let title = document.createElement("h1");
-  title.textContent = texto;
-  if (clase !== "") {
-    title.classList.add(clase);
-    return title;
+//Forms and inputs
+function Form(config) {
+  let setForm = document.createElement("form");
+  if (typeof config.className === "object") {
+    config.className.forEach((clase) => {
+      setForm.classList.add(clase);
+    });
   } else {
-    return title;
+    setForm.classList.add(config.className);
   }
+  config.id ? (setForm.id = config.id) : null;
+
+  if(typeof config.input === 'object'){
+    config.input.forEach(input => {
+    let setInput = document.createElement(input.type)
+    setInput.setAttribute('name', input.name)
+    input.id ? setInput.id = input.id : setInput.id = input.name
+  })
+  }else{
+    let setInput = document.createElement(input.type)
+     setInput.setAttribute('name', input.name)
+    input.id ? setInput.id = input.id : setInput.id = input.name
+  }
+
+  return setForm;
 }
 
-function Div(clase) {
-  let div = document.createElement("div");
-  if (clase !== "") {
-    div.classList.add(clase);
-    return div;
-  } else {
-    return div;
-  }
-}
-
-function Span(clase) {
-  let span = document.createElement("span");
-  if (clase !== "") {
-    span.classList.add(clase);
-    return span;
-  } else {
-    return span;
-  }
-}
-
-function Section(clase) {
-  let section = document.createElement("section");
-  if (clase !== "") {
-    section.classList.add(clase);
-    return section;
-  } else {
-    return section;
-  }
-}
-
-function Image(src, clase) {
-  let image = document.createElement("img");
-  image.src = src;
-  if (clase !== "") {
-    image.classList.add(clase);
-    return image;
-  } else {
-    return image;
-  }
-}
-
-export { Button, Parrafo, Titulo, Div, Section, Image, Span };
+export { Container, Texto, Asset, Form };

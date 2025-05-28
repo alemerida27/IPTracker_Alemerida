@@ -17,6 +17,7 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "eslint-config-prettier": "^10.1.2"
+    "eslint-config-prettier": "^10.1.2",
+    "leaflet": "^1.9.4"
   }
 }

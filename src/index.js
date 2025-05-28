@@ -5,19 +5,21 @@ import "./styles/style.css";
 import "./styles/index.css";
 import Arrow from "./assets/icon-arrow.svg";
 import Marker from "./assets/icon-location.svg";
-import L, { icon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import L, { icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Geo } from "./js/api/geolocation";
 
+let map;
+let marker;
+
 async function establecerValores(ipSelect) {
-  
-let data;
-if (!ipSelect) {
-    data = await Geo('').then((data) => data);
-} else {
+  let data;
+  if (!ipSelect) {
+    data = await Geo("").then((data) => data);
+  } else {
     data = await Geo(ipSelect).then((data) => data);
-}
-  const { ip, location, timezone, isp, lat, lng} = data;
+  }
+  const { ip, location, timezone, isp, lat, lng } = data;
 
   document.getElementById("IP_ADDRESS").textContent = ip;
   document.getElementById("LOCATION").textContent = location;
@@ -29,22 +31,27 @@ if (!ipSelect) {
     iconSize: [30, 30],
     iconAnchor: [22, 94],
     popupAnchor: [-3, -76],
-  })
+  });
 
-  let map = L.map('map').setView([lat, lng], 13)
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+  if (!map) {
+    map = L.map("map").setView([lat, lng], 13);
 
-L.marker([lat, lng], {icon: myIcon}).addTo(map)
-    .bindPopup('Aqui estas tu')
-    .openPopup();
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    marker = L.marker([lat, lng], { icon: myIcon })
+      .addTo(map)
+      .bindPopup("Aqui estas tu")
+      .openPopup();
+  } else {
+    map.setView([lat, lng], 13);
+    marker.setLatLng([lat, lng]);
+  }
 }
 
-window.addEventListener('load', () => {
-    establecerValores()
-} )
-
+window.addEventListener('load', () => establecerValores())
 // =================== HEADER: Título ===================
 const TITLE_HEADER = Texto({ type: "h1", text: "IP Address Tracker" });
 
@@ -56,7 +63,7 @@ const CONFIG_INPUT = {
   placeholder: "192.168.1.1",
 };
 const BUTTON_SEND = Boton({ type: "button", text: "h", buttonType: "submit" });
-// Añade el icono de flecha al botón
+
 BUTTON_SEND.append(Asset({ type: "img", src: Arrow }));
 const INPUT_HEADER = Form({ input: CONFIG_INPUT, id: "formIP" });
 
@@ -72,9 +79,8 @@ const RESULT_NAMES = [
   { text: "ISP" },
 ];
 
-
-const MAP = Container({type: 'div',id: 'map' ,className: 'map'})
-CONTENT.append(MAP)
+const MAP = Container({ type: "div", id: "map", className: "map" });
+CONTENT.append(MAP);
 
 // Crea los contenedores para cada resultado
 RESULT_NAMES.forEach((texto) => {

@@ -1,99 +1,96 @@
-header{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    color: white;
-    background-image: url('../assets/pattern-bg-mobile.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 300px;
+header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  color: white;
+  background-image: url("../assets/pattern-bg-mobile.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 300px;
 }
 
-header h1{
-    font-size: clamp(24px, 2.5vw, 30px);
+header h1 {
+  font-size: clamp(24px, 2.5vw, 30px);
 }
 
-#formIP{
-    margin: auto;
-    display: flex;
-    height: 55px;
-    width: 320px;
+#formIP {
+  margin: auto;
+  display: flex;
+  height: 55px;
+  width: 320px;
 }
 
-#formIP input{
-    padding-inline: 25px;
-    width: 100%;
-    height: 100%;
-    border-radius: 15px 0px 0 15px;
-    outline: none;
-    border: none;
+#formIP input {
+  padding-inline: 25px;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px 0px 0 15px;
+  outline: none;
+  border: none;
 }
 
-#formIP input::placeholder{
-    font-size: clamp(19px, 2.5vw, 25px);
+#formIP input::placeholder {
+  font-size: clamp(19px, 2.5vw, 25px);
 }
 
-#formIP button{
-    display: flex;
-    border: none;
-    background-color: black;
-    border-radius: 0px 15px 15px 0px;
-    width: 70px;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.5s ease;
+#formIP button {
+  display: flex;
+  border: none;
+  background-color: black;
+  border-radius: 0px 15px 15px 0px;
+  width: 70px;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
 }
 
-#formIP button:hover{
-    background-color:hsl(0, 0%, 17%); ;
+#formIP button:hover {
+  background-color: hsl(0, 0%, 17%);
 }
 
-
-.div-all{
-    position: relative;
-    z-index: 22;
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-    inset: 0;
-    margin: auto;
+.div-all {
+  position: relative;
+  z-index: 22;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  inset: 0;
+  margin: auto;
 }
 
-.div-results{
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    padding: 20px;
-    border-radius: 18px;
-    background-color: white;
-    color:  hsl(0, 0%, 17%);
-    box-shadow: 0 0 10px rgba(15, 15, 15, 0.288);
-    transition: transform 0.5s ease ;
+.div-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 20px;
+  border-radius: 18px;
+  background-color: white;
+  color: hsl(0, 0%, 17%);
+  box-shadow: 0 0 10px rgba(15, 15, 15, 0.288);
+  transition: transform 0.5s ease;
 }
 
-.div-results div h3{
-    color: hsl(0, 0%, 59%);
-    font-weight: 400;
-    font-size: 15px;
-    z-index: 999;
+.div-results div h3 {
+  color: hsl(0, 0%, 59%);
+  font-weight: 400;
+  font-size: 15px;
+  z-index: 999;
 }
 
-
-
-.map{
-    z-index: 0;
-    position: relative;
-    height: 480px;
+.map {
+  z-index: 0;
+  position: relative;
+  height: 480px;
 }
 
 @media (min-width: 675px) {
-    header{
-        background-image: url('../assets/pattern-bg-desktop.png');
-    }
-    .div-results{
-        transform: translateY(4rem);
-        flex-direction: row;
-    }
+  header {
+    background-image: url("../assets/pattern-bg-desktop.png");
+  }
+  .div-results {
+    transform: translateY(4rem);
+    flex-direction: row;
+  }
 }
